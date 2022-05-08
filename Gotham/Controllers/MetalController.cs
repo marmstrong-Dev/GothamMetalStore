@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Gotham.Models;
+using Gotham.Tools;
 
 namespace Gotham.Controllers
 {
@@ -23,9 +24,27 @@ namespace Gotham.Controllers
 
         // Get List of All Available Metals
         [HttpGet("AllMetal")]
-        public async Task<ActionResult<Metal>> GetAllMetals()
+        public async Task<ActionResult<Metal>> GetAllMetals([FromQuery] MetalQueryParameters queryParameters)
         {
             IQueryable<Metal> metals = _context.Metals;
+
+            // Filter By Bundle Size
+            if (queryParameters.MinSize != null && queryParameters.MaxSize != null)
+            {
+                metals = metals.Where (
+                    m => m.metalBundleSize >= queryParameters.MinSize.Value &&
+                    m.metalBundleSize <= queryParameters.MaxSize.Value
+                );
+            }
+
+            // Filter By Type
+            if (!string.IsNullOrEmpty(queryParameters.metalType))
+            { metals = metals.Where(m => m.metalType == queryParameters.metalType); }
+
+            // Paginations
+            metals = metals
+                .Skip(queryParameters.Size * (queryParameters.Page - 1))
+                .Take(queryParameters.Size);
 
             return Ok(await metals.ToArrayAsync());
         }

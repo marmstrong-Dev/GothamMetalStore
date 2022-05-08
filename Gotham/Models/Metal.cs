@@ -9,5 +9,7 @@ namespace Gotham.Models
         public string metalType { get; set; }
         public int metalBundleSize { get; set; }
         public DateTime lastOrdered { get; set; }
+        public int classificationId { get; set; }
+        public virtual Classification metalClassification { get; set; }
     }
 }

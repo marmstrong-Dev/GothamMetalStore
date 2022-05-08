@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Text.Json.Serialization;
+using System.ComponentModel.DataAnnotations;
 
 namespace Gotham.Models
 {
@@ -6,8 +8,10 @@ namespace Gotham.Models
     {
         public int id { get; set; }
         public DateTime orderTime { get; set; }
-        public Metal orderedMetal { get; set; }
+        [JsonIgnore]
+        public virtual Metal orderedMetal { get; set; }
         public int orderBatchQuantity { get; set; }
-        public Vendor orderVendor { get; set; }
+        [JsonIgnore]
+        public virtual Vendor orderVendor { get; set; }
     }
 }

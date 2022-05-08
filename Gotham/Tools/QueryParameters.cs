@@ -7,8 +7,8 @@ namespace Gotham.Tools
 {
     public class QueryParameters
     {
-        public int page { get; set; }
-        public string sortBy { get; set; } = "id";
+        public int Page { get; set; }
+        public string SortBy { get; set; } = "id";
         private string sortOrder = "asc";
 
         const int _maxSize = 100;
