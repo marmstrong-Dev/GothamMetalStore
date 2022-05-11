@@ -14,6 +14,7 @@ namespace Gotham.Tools
         const int _maxSize = 100;
         private int _size = 50;
 
+        // Property for determining page size for pagination
         public int Size
         {
             get
@@ -22,6 +23,7 @@ namespace Gotham.Tools
             { _size = Math.Min(_maxSize, value); }
         }
 
+        // Property for sorting either asc 'Ascending' or desc 'Descending'
         public string SortOrder
         {
             get

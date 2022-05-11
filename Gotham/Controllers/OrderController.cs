@@ -20,5 +20,23 @@ namespace Gotham.Controllers
             _context = context;
             _context.Database.EnsureCreated();
         }
+
+        [HttpGet("AllOrders")]
+        public async Task<ActionResult<Order>> GetAllOrders()
+        {
+            IQueryable<Order> orders = _context.Orders;
+
+            return Ok(await orders.ToArrayAsync());
+        }
+
+        [HttpGet("GetOrder/{id}")]
+        public async Task<IActionResult> GetOrder(int id)
+        {
+            var order = await _context.Orders.FindAsync(id);
+            if (order == null)
+            { return NotFound(); }
+
+            return Ok(order);
+        }
     }
 }

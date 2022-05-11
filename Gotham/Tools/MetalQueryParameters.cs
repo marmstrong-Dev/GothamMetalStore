@@ -1,4 +1,6 @@
-﻿namespace Gotham.Tools
+﻿using System;
+
+namespace Gotham.Tools
 {
     public class MetalQueryParameters : QueryParameters
     {
