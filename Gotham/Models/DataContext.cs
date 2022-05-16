@@ -15,8 +15,15 @@ namespace Gotham.Models
                 .WithOne(m => m.metalClassification)
                 .HasForeignKey(m => m.classificationId);
             
-            modelBuilder.Entity<Order>().HasOne(o => o.orderVendor);
-            modelBuilder.Entity<Order>().HasOne(o => o.orderedMetal);
+            modelBuilder.Entity<Order>()
+                .HasOne(o => o.orderVendor)
+                .WithMany(v => v.vendorOrders)
+                .HasForeignKey(v => v.vendorId);
+            
+            modelBuilder.Entity<Order>()
+                .HasOne(o => o.orderedMetal)
+                .WithMany(m => m.metalOrders)
+                .HasForeignKey(m => m.metalId);
         }
 
         public DbSet<Metal> Metals { get; set; }

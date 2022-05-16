@@ -10,5 +10,6 @@ namespace Gotham.Models
         public string vendorCity { get; set; }
         public string vendorStateTerritory { get; set; }
         public string vendorCountry { get; set; }
+        public virtual List<Order> vendorOrders { get; set; }
     }
 }
