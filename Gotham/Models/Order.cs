@@ -6,6 +6,7 @@ namespace Gotham.Models
 {
     public class Order
     {
+        [Key]
         public int id { get; set; }
         public DateTime orderTime { get; set; }
         public int metalId { get; set; }

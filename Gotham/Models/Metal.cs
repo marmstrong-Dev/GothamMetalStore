@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Text.Json.Serialization;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Gotham.Models
 {
     public class Metal
     {
+        [Key]
         public int id { get; set; }
         public string metalType { get; set; }
         public int metalBundleSize { get; set; }
